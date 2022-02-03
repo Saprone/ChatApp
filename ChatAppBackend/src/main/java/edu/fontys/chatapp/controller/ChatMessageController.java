@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 public class ChatMessageController {
 
     @MessageMapping("/chat.send")
-    @SendTo("/topic/public")
+    @SendTo("/topic/chatmessage")
     public String sendChatMessage() {
         return "This is a test message.";
     }

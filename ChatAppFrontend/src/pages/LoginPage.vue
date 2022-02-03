@@ -23,13 +23,17 @@ export default {
       connection: null
     }
   },
-  created: function() {
-    console.log("Starting connection to WebSocket Server")
-
-    this.socket = new SockJS("http://localhost:8080/sockjs");
-    this.stompClient = Stomp.over(this.socket);
-
-    console.log(this.stompClient);
+  created:function() {
+    let socket = new SockJS('http://localhost:8080/sockjs');
+    let stompClient = Stomp.over(socket);
+    
+    stompClient.connect({}, function(frame) {
+        stompClient.subscribe('/topic/chatmessage', function(message) {
+          
+        console.log("message: " + message.body);
+        //console.warn(JSON.parse(message.body));
+      });
+    });
   }
 }
 </script>

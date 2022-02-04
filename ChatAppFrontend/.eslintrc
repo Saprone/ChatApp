@@ -1,7 +1,16 @@
 {
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "vue"
-    ]
+    "eslintConfig": {
+        "root": true,
+        "env": {
+          "node": true
+        },
+        "extends": [
+          "plugin:vue/vue2-essential",
+          "eslint:recommended"
+        ],
+        "parserOptions": {
+          "parser": "babel-eslint"
+        },
+        "rules": {}
+      }
 }

@@ -5,8 +5,10 @@
           "node": true
         },
         "extends": [
-          "plugin:vue/vue2-essential",
-          "eslint:recommended"
+          "plugin:vue/essential",
+          "eslint:recommended",
+          "plugin:prettier/recommended",
+          "@vue/pretier"
         ],
         "parserOptions": {
           "parser": "babel-eslint"

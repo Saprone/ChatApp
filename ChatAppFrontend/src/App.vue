@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/chatroom">Chatroom</router-link> |
-      <router-link to="/dashboardchatroom">Dashboard Chatroom</router-link> |
-      <router-link to="/dashboardusers">Dashboard Users</router-link>    
-    </div>
     <router-view/>
   </div>
 </template>

@@ -1,7 +1,9 @@
 <template>
-  <div class="loginpage">
-    <div class="panel">
-      <form action="#" @submit.prevent="login">
+  <div class="registerpage">
+    <h2>Register Page</h2>   
+
+    <!--<div class="panel">
+      <form action="#" @submit.prevent="register">
         <div class="section">
           <label for="room">Room:</label>&nbsp;
           <select name="room">
@@ -19,20 +21,19 @@
           <input required type="password" name="password"/>  
         </div> 
         <div class="section">
-          <button type="login">Login</button><br><br>
-          <router-link to="/register">Register here</router-link>
+          <button type="register">Register</button>
         </div> 
       </form> 
-    </div>
+    </div>-->
   </div>
 </template> 
 
 <script>
-import SockJS from 'sockjs-client'
+/*import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
 
 export default {
-  name: 'LoginPage',
+  name: 'RegisterPage',
   data() {
     return {
       room: '',
@@ -50,7 +51,7 @@ export default {
     });
   },
   methods: {
-    login(action) {
+    register(action) {
       const {room, username, password} = Object.fromEntries(new FormData(action.target));
       this.room = room;
       this.username = username;
@@ -59,21 +60,21 @@ export default {
       console.log("room: "+ this.room, ", username: "+this.username, ", password: "+this.password);
     }
   }
-}
+}*/
 </script>
 
 <style scoped>
-.loginpage .panel {
+/*.registerpage .panel {
    margin-top: 300px;
 }
-.loginpage form {
+.registerpage form {
   display: block;
   margin: auto;
   border: 1px solid black;
   width: 200px;
   padding: 15px 5px;
 }
-.loginpage .section:not(:first-of-type) {
+.registerpage .section:not(:first-of-type) {
   margin-top: 10px;
-}
+}*/
 </style>

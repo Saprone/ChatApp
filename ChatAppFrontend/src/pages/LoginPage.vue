@@ -40,15 +40,6 @@ export default {
       password: ''
     }
   },
-  created() {
-    let socket = new SockJS('http://localhost:8080/sockjs');
-    let stompClient = Stomp.over(socket);
-    
-    stompClient.connect({}, function(frame) {
-        stompClient.subscribe('/topic/chatmessage', function(message) {
-      });
-    });
-  },
   methods: {
     login(action) {
       const {room, username, password} = Object.fromEntries(new FormData(action.target));
@@ -57,6 +48,15 @@ export default {
       this.password = password;
 
       console.log("room: "+ this.room, ", username: "+this.username, ", password: "+this.password);
+
+      //sockjs
+      let socket = new SockJS('http://localhost:8080/sockjs');
+      let stompClient = Stomp.over(socket);
+    
+      stompClient.connect({}, function(frame) {
+        stompClient.subscribe('/topic/chatmessage', function(message) {
+      });
+    });
     }
   }
 }

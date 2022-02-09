@@ -3,26 +3,20 @@
     <div class="panel">
       <form action="#" @submit.prevent="login">
         <div class="section">
-          <label for="room">Room:</label>&nbsp;
-          <select name="room">
-            <option value="room1">Room1</option>
-            <option value="room2">Room2</option>
-            <option value="room3">Room3</option>
-          </select> 
-        </div>
-        <div class="section">
-          <label for="username">Username:</label>&nbsp;
+          <label for="username">Username:</label>
           <input required type="text" name="username"/>  
         </div>
         <div class="section">
-          <label for="password">Password:</label>&nbsp;
-          <input required type="password" name="password"/>  
-        </div> 
-        <div class="section">
-          <button type="login">Login</button><br><br>
-          <router-link to="/register">Register here</router-link>
-        </div> 
-      </form> 
+          <button type="login">Login</button>
+        </div>
+      </form>
+      <div class="section">
+        <ul>
+          <li v-for="user in usernames" :key="user">
+            {{ user }} joined
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template> 
@@ -33,30 +27,33 @@ import Stomp from 'webstomp-client'
 
 export default {
   name: 'LoginPage',
-  data() {
+  data: () => {
     return {
-      room: '',
-      username: '',
-      password: ''
+      usernames: [],
+      username: ''  
     }
   },
+  created() {
+    this.socket = new SockJS("http://localhost:8080/sockjs");
+    this.stompClient = Stomp.over(this.socket);
+
+    this.stompClient.connect({}, frame => {
+        this.stompClient.subscribe("/topic/user", payload => {
+          if(payload.body !== null) {
+            this.usernames.push(payload.body);
+          }
+        });
+      }
+    );
+  },  
   methods: {
     login(action) {
-      const {room, username, password} = Object.fromEntries(new FormData(action.target));
-      this.room = room;
+      const {username} = Object.fromEntries(new FormData(action.target));
       this.username = username;
-      this.password = password;
 
-      console.log("room: "+ this.room, ", username: "+this.username, ", password: "+this.password);
-
-      //sockjs
-      let socket = new SockJS('http://localhost:8080/sockjs');
-      let stompClient = Stomp.over(socket);
-    
-      stompClient.connect({}, function(frame) {
-        stompClient.subscribe('/topic/chatmessage', function(message) {
-      });
-    });
+      if(this.stompClient) {
+        this.stompClient.send("/app/user.input", JSON.stringify({ username: this.username }), {});
+      }
     }
   }
 }
@@ -73,7 +70,11 @@ export default {
   width: 200px;
   padding: 15px 5px;
 }
-.loginpage .section:not(:first-of-type) {
+.loginpage .section:not(:first-of-type), .loginpage input {
   margin-top: 10px;
+}
+.loginpage ul {
+  list-style-type: none;
+  margin-right: 60px;
 }
 </style>

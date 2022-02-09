@@ -29,7 +29,6 @@ const routes = [
     name: 'Register',
     component: () => import('../pages/RegisterPage.vue')
   }
-
 ]
 
 const router = new VueRouter({

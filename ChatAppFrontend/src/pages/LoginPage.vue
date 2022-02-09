@@ -41,6 +41,7 @@ export default {
         this.stompClient.subscribe("/topic/user", payload => {
           if(payload.body !== null) {
             this.usernames.push(payload.body);
+            //this.$router.push('Chatroom');
           }
         });
       }

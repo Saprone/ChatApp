@@ -1,15 +1,12 @@
 <template>
   <div class="logincomponent">
-    <p>{{ message }}</p>
+    <h2>Login Component</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LoginComponent',
-  props: {
-    message: String
-  }
+  name: 'LoginComponent'
 }
 </script>
 

@@ -10,13 +10,6 @@
           <button type="login">Login</button>
         </div>
       </form>
-      <div class="section">
-        <ul>
-          <li v-for="user in usernames" :key="user">
-            {{ user }} joined
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 </template> 
@@ -41,7 +34,8 @@ export default {
         this.stompClient.subscribe("/topic/user", payload => {
           if(payload.body !== null) {
             this.usernames.push(payload.body);
-            //this.$router.push('Chatroom');
+
+            this.$router.push({name: "Chatroom", params: { data: this.usernames }});
           }
         });
       }
@@ -52,7 +46,7 @@ export default {
       const {username} = Object.fromEntries(new FormData(action.target));
       this.username = username;
 
-      if(this.stompClient) {
+      if(this.stompClient && this.username != '') {
         this.stompClient.send("/app/user.input", JSON.stringify({ username: this.username }), {});
       }
     }
@@ -73,9 +67,5 @@ export default {
 }
 .loginpage .section:not(:first-of-type), .loginpage input {
   margin-top: 10px;
-}
-.loginpage ul {
-  list-style-type: none;
-  margin-right: 60px;
 }
 </style>

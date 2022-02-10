@@ -31,15 +31,14 @@ export default {
     this.stompClient = Stomp.over(this.socket);
 
     this.stompClient.connect({}, frame => {
-        this.stompClient.subscribe("/topic/user", payload => {
-          if(payload.body !== null) {
-            this.usernames.push(payload.body);
+      this.stompClient.subscribe("/topic/user", payload => {
+        if(payload.body !== null) {
+          this.usernames.push(payload.body);
 
-            this.$router.push({name: "Chatroom", params: { data: this.usernames }});
-          }
-        });
-      }
-    );
+          this.$router.push({name: "Chatroom", params: { data: this.usernames }});
+        }
+      });
+    });
   },  
   methods: {
     login(action) {

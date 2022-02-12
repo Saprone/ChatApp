@@ -1,6 +1,6 @@
 <template>  
   <div class="chatroompage">
-    <h2>ChatRoom Page</h2> 
+    <h2>Chatroom Page</h2> 
     <div class="section">
       <ul>
         <li v-for="user in usernames" :key="user">

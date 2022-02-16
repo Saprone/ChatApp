@@ -1,7 +1,6 @@
 package edu.fontys.chatapp.config;
 
 import edu.fontys.chatapp.ChatAppBackend;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -9,8 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
+import org.springframework.web.socket.sockjs.client.SockJsClient;
+import org.springframework.web.socket.sockjs.client.WebSocketTransport;
+
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 @SpringBootTest(classes = ChatAppBackend.class)
 @WebAppConfiguration
@@ -25,11 +30,17 @@ public class WebSocketConfigurationTest {
 
 	@BeforeAll
 	public void setUp() {
-		//setup
+		blockingQueue = new LinkedBlockingDeque<>();
+		stompClient =
+				new WebSocketStompClient(
+				new SockJsClient(List.of(
+				new WebSocketTransport(
+				new StandardWebSocketClient()
+		))));
 	}
 
 	@Test
 	public void shouldReceiveAMessageFromTheServer() throws Exception {
-		Assertions.assertEquals(1, 1);
+		StompSession session = stompClient.connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {}).get();
 	}
 }

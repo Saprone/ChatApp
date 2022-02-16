@@ -35,10 +35,10 @@ public class WebSocketConfigurationTest {
 	public void setUp() {
 		blockingQueue = new LinkedBlockingDeque<>();
 		webSocketStompClient =
-				new WebSocketStompClient(
-				new SockJsClient(List.of(
-				new WebSocketTransport(
-				new StandardWebSocketClient()
+			new WebSocketStompClient(
+			new SockJsClient(List.of(
+			new WebSocketTransport(
+			new StandardWebSocketClient()
 		))));
 	}
 

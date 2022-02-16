@@ -64,9 +64,4 @@ public class WebSocketConfigurationTest {
 		session.send(WEBSOCKET_TOPIC, message.getBytes());
 		Assertions.assertEquals(message, blockingQueue.poll(1, SECONDS));
 	}
-
-	@Test
-	public void testMessageIsSent() throws Exception {
-
-	}
 }

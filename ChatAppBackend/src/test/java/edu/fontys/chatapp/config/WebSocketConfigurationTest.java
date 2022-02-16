@@ -64,7 +64,7 @@ public class WebSocketConfigurationTest {
 
 		@Override
 		public void handleFrame(StompHeaders stompHeaders, Object payload) {
-			blockingQueue.offer(new String((byte[]) payload));
+			blockingQueue.add(new String((byte[]) payload));
 		}
 	}
 }

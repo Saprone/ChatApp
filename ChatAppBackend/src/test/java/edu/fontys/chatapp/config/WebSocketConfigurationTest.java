@@ -22,7 +22,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WebSocketConfigurationTest {
 
-	static final String WEBSOCKET_URI = "http://localhost:8081/sockjs";
+	static final String WEBSOCKET_URI = "http://localhost:8080/sockjs";
 	static final String WEBSOCKET_TOPIC = "/topic";
 
 	BlockingQueue<String> blockingQueue;

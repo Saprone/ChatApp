@@ -1,10 +1,10 @@
 package edu.fontys.chatapp.config;
 
 import edu.fontys.chatapp.ChatAppBackend;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.messaging.simp.stomp.StompFrameHandler;
+import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -13,9 +13,12 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 @SpringBootTest(classes = ChatAppBackend.class)
 @WebAppConfiguration
@@ -26,12 +29,12 @@ public class WebSocketConfigurationTest {
 	static final String WEBSOCKET_TOPIC = "/topic";
 
 	BlockingQueue<String> blockingQueue;
-	WebSocketStompClient stompClient;
+	WebSocketStompClient webSocketStompClient;
 
-	@BeforeAll
+	@BeforeEach
 	public void setUp() {
 		blockingQueue = new LinkedBlockingDeque<>();
-		stompClient =
+		webSocketStompClient =
 				new WebSocketStompClient(
 				new SockJsClient(List.of(
 				new WebSocketTransport(
@@ -40,7 +43,28 @@ public class WebSocketConfigurationTest {
 	}
 
 	@Test
-	public void shouldReceiveAMessageFromTheServer() throws Exception {
-		StompSession session = stompClient.connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {}).get();
+	public void shouldReceiveMessageFromTheServer() throws Exception {
+		StompSession session = webSocketStompClient
+				.connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {})
+				.get(1, SECONDS);
+
+		session.subscribe(WEBSOCKET_TOPIC, new DefaultStompFrameHandler());
+
+		String message = "test";
+		session.send(WEBSOCKET_TOPIC, message.getBytes());
+
+		Assertions.assertEquals(message, blockingQueue.poll(1, SECONDS));
+	}
+
+	class DefaultStompFrameHandler implements StompFrameHandler {
+		@Override
+		public Type getPayloadType(StompHeaders stompHeaders) {
+			return byte[].class;
+		}
+
+		@Override
+		public void handleFrame(StompHeaders stompHeaders, Object payload) {
+			blockingQueue.offer(new String((byte[]) payload));
+		}
 	}
 }

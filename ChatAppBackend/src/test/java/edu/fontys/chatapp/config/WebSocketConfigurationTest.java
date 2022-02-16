@@ -43,28 +43,30 @@ public class WebSocketConfigurationTest {
 	}
 
 	@Test
-	public void shouldReceiveMessageFromTheServer() throws Exception {
+	public void testMessageIsReceived() throws Exception {
 		StompSession session = webSocketStompClient
-				.connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {})
-				.get(1, SECONDS);
+			.connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {})
+			.get(1, SECONDS);
 
-		session.subscribe(WEBSOCKET_TOPIC, new DefaultStompFrameHandler());
+		session.subscribe(WEBSOCKET_TOPIC, new StompFrameHandler() {
+			@Override
+			public Type getPayloadType(StompHeaders stompHeaders) {
+				return byte[].class;
+			}
 
-		String message = "test";
+			@Override
+			public void handleFrame(StompHeaders stompHeaders, Object payload) {
+				blockingQueue.add(new String((byte[]) payload));
+			}
+		});
+
+		String message = "message";
 		session.send(WEBSOCKET_TOPIC, message.getBytes());
-
 		Assertions.assertEquals(message, blockingQueue.poll(1, SECONDS));
 	}
 
-	class DefaultStompFrameHandler implements StompFrameHandler {
-		@Override
-		public Type getPayloadType(StompHeaders stompHeaders) {
-			return byte[].class;
-		}
+	@Test
+	public void testMessageIsSent() throws Exception {
 
-		@Override
-		public void handleFrame(StompHeaders stompHeaders, Object payload) {
-			blockingQueue.add(new String((byte[]) payload));
-		}
 	}
 }

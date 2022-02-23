@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.palantir.docker' version '0.32.0'
 }
 
 group 'edu.fontys'
@@ -15,13 +14,6 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-}
-
-docker {
-    name "chatapp"
-    dockerfile file('src/docker/Dockerfile')
-    copySpec.from(jar).rename(".*","app.jar")
-    buildArgs(['JAR_FILE': "app.jar"])
 }
 
 dependencies {

@@ -35,7 +35,7 @@ export default {
         if(payload.body !== null) {
           this.usernames.push(payload.body);
 
-          this.$router.push({name: "Chatroom", params: { data: this.usernames }});
+          this.$router.push({name: "Chatroom", params: { data: this.usernames }}).catch(()=>{});
         }
       });
     });

@@ -3,7 +3,7 @@ package edu.fontys.chatapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserModel {
+public class User {
 
     private String username;
     private String room;

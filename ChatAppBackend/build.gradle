@@ -26,6 +26,9 @@ dependencies {
 
     // Database
     implementation name: 'database-library'
+
+    // Swagger
+
 }
 
 test {

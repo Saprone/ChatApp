@@ -5,6 +5,7 @@ import java.util.List;
 
 public class User {
 
+    private int id;
     private String username;
     private String room;
     private List<String> chatMessages = new ArrayList<>();

@@ -27,8 +27,14 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/user")
     @Operation(summary = "Get user", responses = {
-            @ApiResponse(description = "Get user success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
-            @ApiResponse(description = "User not found", responseCode = "409", content = @Content)
+        @ApiResponse(
+            description = "Get user success",
+            responseCode = "200",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
+        @ApiResponse(
+            description = "User not found",
+            responseCode = "409",
+            content = @Content)
     })
     public ResponseEntity<User> getUser(int id) {
         if (1 == id) {

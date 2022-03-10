@@ -55,9 +55,29 @@ public class UserController {
 
     @PostMapping("/user/register")
     @Operation(summary = "register user with specified name, password and room")
-    public void postUser(@RequestBody User user) {
+    public void registerUser(@RequestBody User user) {
         if (user != null) {
             //userService.registerUser(user);
+        } else {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
+        }
+    }
+
+    @PostMapping("/user/login")
+    @Operation(summary = "login user with specified name, password and room")
+    public void loginUser(@RequestBody User user) {
+        if (user != null) {
+            //userService.loginUser(user);
+        } else {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
+        }
+    }
+
+    @PutMapping("/user/update")
+    @Operation(summary = "update user with specified name, password")
+    public void updateUser(@RequestBody User user) {
+        if (user != null) {
+            //userService.updateUser(user);
         } else {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
         }

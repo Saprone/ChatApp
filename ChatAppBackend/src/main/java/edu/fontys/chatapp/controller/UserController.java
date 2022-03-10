@@ -8,12 +8,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+
+import java.util.UUID;
 
 @RestController
 @Tag(name = "User")
@@ -25,31 +25,18 @@ public class UserController {
         return userModel.getUsername();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/user")
-    @Operation(summary = "Get user", responses = {
-        @ApiResponse(
-            description = "Get user success",
-            responseCode = "200",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
-        @ApiResponse(
-            description = "User not found",
-            responseCode = "409",
-            content = @Content)
-    })
-    public ResponseEntity<User> getUser(int id) {
-        if (1 == id) {
+    @GetMapping("/user/get/{id}")
+    @Operation(summary = "get user with specified id")
+    public ResponseEntity<User> getUser(@PathVariable UUID id) {
+        if (id != null) {
             User user = new User();
-            user.setId(1);
-            user.setUsername("User1");
+            user.setId(id);
+            user.setUsername("User"+id);
+            user.setRoom("DefaultRoom");
 
             return ResponseEntity.ok(user);
         } else {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
         }
-    }
-
-    @RequestMapping(method = RequestMethod.POST, path = "/user")
-    public ResponseEntity<Void> updateUser(User user) {
-        return ResponseEntity.ok().build();
     }
 }

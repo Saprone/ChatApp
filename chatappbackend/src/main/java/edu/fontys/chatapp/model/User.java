@@ -2,19 +2,20 @@ package edu.fontys.chatapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class User {
 
-    private int id;
+    private UUID id;
     private String username;
     private String room;
     private List<String> chatMessages = new ArrayList<>();
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

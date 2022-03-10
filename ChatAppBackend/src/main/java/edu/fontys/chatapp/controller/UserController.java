@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,9 @@ public class UserController {
         return userModel.getUsername();
     }
 
+    //@Autowired
+    //UserService userService;
+
     @GetMapping("/user/get/{id}")
     @Operation(summary = "get user with specified id")
     public ResponseEntity<User> getUser(@PathVariable UUID id) {
@@ -35,6 +39,17 @@ public class UserController {
             user.setRoom("DefaultRoom");
 
             return ResponseEntity.ok(user);
+            //return userService.getUserById(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
+        }
+    }
+
+    @DeleteMapping("/user/delete/{id}")
+    @Operation(summary = "delete user with specified id")
+    public void deleteUser(@PathVariable UUID id) {
+        if (id != null) {
+            //userService.delete(id);
         } else {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
         }

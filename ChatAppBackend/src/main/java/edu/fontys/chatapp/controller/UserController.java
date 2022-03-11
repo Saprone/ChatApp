@@ -2,6 +2,9 @@ package edu.fontys.chatapp.controller;
 
 import edu.fontys.chatapp.model.User;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,21 +13,19 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @Tag(name = "User")
 public class UserController {
 
-    //private final UserService userService;
-
     @MessageMapping("/user.input")
     @SendTo("/topic/user")
     public String UserModel(User userModel) throws Exception {
         return userModel.getUsername();
     }
+
+    //private final UserService userService;
 
     @GetMapping("/user/get/{id}")
     @Operation(summary = "get user with specified id")
@@ -80,22 +81,5 @@ public class UserController {
         } else {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
         }
-    }
-
-    @GetMapping("/users/all")
-    @Operation(summary = "get all users")
-    public List<User> getUsers() {
-        List<User> products = new ArrayList<>();
-
-        User user1 = new User();
-        user1.setUsername("User1");
-        products.add(user1);
-
-        User user2 = new User();
-        user2.setUsername("User2");
-        products.add(user2);
-
-        return products;
-        //return userService.getUsers();
     }
 }

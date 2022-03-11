@@ -1,40 +1,46 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Chatroom from '../views/Chatroom.vue'
+import Dashboardchatroom from '../views/DashboardChatroom.vue'
+import Dashboardusers from '../views/DashboardUsers.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
     path: '/chatroom',
     name: 'Chatroom',
-    component: () => import('../views/Chatroom.vue')
+    component: Chatroom
   },
   {
     path: '/dashboardchatroom',
     name: 'Dashboardchatroom',
-    component: () => import('../views/DashboardChatroom.vue')
+    component: Dashboardchatroom
   },
   {
     path: '/dashboardusers',
     name: 'Dashboardusers',
-    component: () => import('../views/DashboardUsers.vue')
-  },
-  {
-    path: '/',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: Dashboardusers
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register.vue')
+    component: Register
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: routes,
+  linkActiveClass: 'active'
 })
 
 export default router

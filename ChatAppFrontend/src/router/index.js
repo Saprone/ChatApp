@@ -7,27 +7,27 @@ const routes = [
   {
     path: '/chatroom',
     name: 'Chatroom',
-    component: () => import('../pages/ChatroomPage.vue')
+    component: () => import('../views/Chatroom.vue')
   },
   {
     path: '/dashboardchatroom',
     name: 'Dashboardchatroom',
-    component: () => import('../pages/DashboardChatroomPage.vue')
+    component: () => import('../views/DashboardChatroom.vue')
   },
   {
     path: '/dashboardusers',
     name: 'Dashboardusers',
-    component: () => import('../pages/DashboardUsersPage.vue')
+    component: () => import('../views/DashboardUsers.vue')
   },
   {
     path: '/',
     name: 'Login',
-    component: () => import('../pages/LoginPage.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../pages/RegisterPage.vue')
+    component: () => import('../views/Register.vue')
   }
 ]
 

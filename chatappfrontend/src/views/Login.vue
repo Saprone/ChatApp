@@ -45,16 +45,16 @@ export default {
 
       //Conncect to stomp Client.
       this.stompClient.connect({}, frame => {
-          //Subscribe to a STOMP Broker location.
-          this.stompClient.subscribe("/topic/user", payload => {
-              if(payload.body !== null) {
-                //Add usernames to payload. 
-                this.usernames.push(payload.body);
+        //Subscribe to a STOMP Broker location.
+        this.stompClient.subscribe("/topic/user", payload => {
+          if(payload.body !== null) {
+            //Add usernames to payload. 
+            this.usernames.push(payload.body);
 
-                //Navigate to route.
-                this.$router.push({name: "Chatroom", params: { data: this.usernames }}).catch(()=>{});
-              }
-          });
+            //Navigate to route.
+            this.$router.push({name: "Chatroom", params: { data: this.usernames }}).catch(()=>{});
+          }
+        });
       });
     },
     sendMessageToServer() {

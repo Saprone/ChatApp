@@ -18,5 +18,6 @@ public class User {
     private String room;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
-    //private Collection<String> chatMessages = new ArrayList<>();
+    @ElementCollection
+    private Collection<String> chatMessages = new ArrayList<>();
 }

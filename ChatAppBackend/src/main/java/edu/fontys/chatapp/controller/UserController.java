@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController @RequestMapping("/api") @RequiredArgsConstructor @Tag(name = "User")
 public class UserController {
-    private final UserService userService;
+    //private final UserService userService;
 
     @MessageMapping("/user.input")
     @SendTo("/topic/user")
@@ -21,8 +21,8 @@ public class UserController {
         return userModel.getUsername();
     }
 
-    @GetMapping("/users") @Operation(summary = "Fetching all users")
+    /*@GetMapping("/users") @Operation(summary = "Fetching all users")
     public ResponseEntity<List<User>>getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
-    }
+    }*/
 }

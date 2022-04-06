@@ -1,6 +1,6 @@
 package edu.fontys.chatapp.service;
 
-import edu.fontys.chatapp.model.Role;
+/*import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.repository.RoleRepository;
 import edu.fontys.chatapp.repository.UserRepository;
@@ -46,4 +46,4 @@ public class UserServiceImplementation implements UserService {
         log.info("Fetching all users");
         return userRepository.findAll();
     }
-}
+}*/

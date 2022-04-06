@@ -29,6 +29,15 @@ dependencies {
 
     // Swagger
     implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.6'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // Javax Persistance API
+    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
 }
 
 test {

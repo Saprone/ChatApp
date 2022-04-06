@@ -12,7 +12,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import java.util.List;
 
-/*@RestController */ @RequestMapping("/api") @RequiredArgsConstructor @Tag(name = "User")
+@RestController @RequestMapping("/api") @RequiredArgsConstructor @Tag(name = "User")
 public class UserController {
     private final UserService userService;
 

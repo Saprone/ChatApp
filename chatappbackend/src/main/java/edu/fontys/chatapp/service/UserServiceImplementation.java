@@ -1,6 +1,6 @@
 package edu.fontys.chatapp.service;
 
-/*import edu.fontys.chatapp.model.Role;
+import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.repository.RoleRepository;
 import edu.fontys.chatapp.repository.UserRepository;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-@Service @RequiredArgsConstructor @Transactional @Slf4j
+/*@Service*/ @RequiredArgsConstructor @Transactional @Slf4j
 public class UserServiceImplementation implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -46,4 +46,4 @@ public class UserServiceImplementation implements UserService {
         log.info("Fetching all users");
         return userRepository.findAll();
     }
-}*/
+}

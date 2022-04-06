@@ -1,10 +1,10 @@
 <template>
   <div class="loginpage">
     <div class="panel">
-      <form action="#" @submit.prevent="login">
+      <form action="#" @submit.prevent="handleLogin">
         <div class="section">
-          <label for="username">Username:</label>
-          <input required type="text" name="username"/>  
+          <label>Username:</label>
+          <input v-model="user.username" type="text" name="username" required/>  
         </div>
         <div class="section">
           <button type="login">Login</button>
@@ -17,24 +17,22 @@
 <script>
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
+import User from '../models/user'
 
 export default {
   name: 'LoginPage',
   data: () => {
     return {
-      usernames: [],
-      username: ''  
+      user: new User('', 'Passw0rd!'),
+      usernames: [] 
     }
   },
   created() {
     this.createWebsocketConnection()
   },  
   methods: {
-    login(action) {
-      const {username} = Object.fromEntries(new FormData(action.target));
-      this.username = username;
-
-      if(this.stompClient && this.username != '') {
+    handleLogin() {
+      if(this.stompClient && this.user != null) {
         this.sendMessageToServer()
       }
     },
@@ -52,7 +50,7 @@ export default {
       });
     },
     sendMessageToServer() {
-      this.stompClient.send("/app/user.input", JSON.stringify({ username: this.username }), {});
+      this.stompClient.send("/app/user.input", JSON.stringify({ username: this.user.username }), {});
     }
   }
 }

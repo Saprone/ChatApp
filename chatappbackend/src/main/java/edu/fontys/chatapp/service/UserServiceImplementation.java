@@ -12,8 +12,8 @@ import java.util.List;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class UserServiceImplementation implements UserService {
-    //private final UserRepository userRepository;
-    //private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Override
     public User saveUser(User user) {
@@ -47,7 +47,6 @@ public class UserServiceImplementation implements UserService {
     @Override
     public List<User> getUsers() {
         log.info("Fetching all users");
-        //return userRepository.findAll();
-        return null;
+        return userRepository.findAll();
     }
 }

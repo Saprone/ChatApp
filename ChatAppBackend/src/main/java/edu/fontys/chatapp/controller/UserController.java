@@ -3,6 +3,7 @@ package edu.fontys.chatapp.controller;
 import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.service.UserService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,4 +39,16 @@ public class UserController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
+
+    @PostMapping("/role/addroletouser")
+    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+        userService.addRoleToUser(form.getUsername(), form.getRoleName());
+        return ResponseEntity.ok().build();
+    }
+}
+
+@Data
+class RoleToUserForm {
+    private String username;
+    private String roleName;
 }

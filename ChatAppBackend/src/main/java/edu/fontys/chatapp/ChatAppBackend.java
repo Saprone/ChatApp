@@ -34,10 +34,10 @@ public class ChatAppBackend {
 			userService.saveUser(new User(null, "Kees K", "kees", "1234", "room2", new ArrayList<>(), new ArrayList<>()));
 			userService.saveUser(new User(null, "Hans H", "hans", "1234", "room1", new ArrayList<>(), new ArrayList<>()));
 
-			//userService.addRoleToUser("piet", "ROLE_SUPER_ADMIN");
-			//userService.addRoleToUser("piet", "ROLE_ADMIN");
-			//userService.addRoleToUser("kees", "ROLE_MANAGER");
-			//userService.addRoleToUser("hans", "ROLE_USER");
+			userService.addRoleToUser("piet", "ROLE_SUPER_ADMIN");
+			userService.addRoleToUser("piet", "ROLE_ADMIN");
+			userService.addRoleToUser("kees", "ROLE_MANAGER");
+			userService.addRoleToUser("hans", "ROLE_USER");
 		};
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
@@ -34,6 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeHttpRequests()
             .antMatchers("/api/login/**").permitAll()
             .antMatchers(GET, "/api/users").permitAll()
+            .antMatchers(POST, "/api/user/**").hasAnyAuthority("ROLE_ADMIN")
+            .antMatchers(POST, "/api/role/**").hasAnyAuthority("ROLE_ADMIN")
             .anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
     }

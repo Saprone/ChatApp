@@ -27,7 +27,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user != null) {
-            log.error("User {} found in the database", username);
+            log.info("User {} found in the database", username);
         } else {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("User not found in the database");

@@ -28,18 +28,16 @@ public class ChatAppBackend {
 	@Bean
 	CommandLineRunner run(UserService userService) {
 		return args -> {
-			userService.saveRole(new Role(null, "ROLE_USER"));
-			userService.saveRole(new Role(null, "ROLE_MANAGER"));
 			userService.saveRole(new Role(null, "ROLE_ADMIN"));
-			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
+			userService.saveRole(new Role(null, "ROLE_USER"));
 
 			userService.saveUser(new User(null, "Piet P", "piet", "1234", "room1", new ArrayList<>(), new ArrayList<>()));
 			userService.saveUser(new User(null, "Kees K", "kees", "1234", "room2", new ArrayList<>(), new ArrayList<>()));
 			userService.saveUser(new User(null, "Hans H", "hans", "1234", "room1", new ArrayList<>(), new ArrayList<>()));
 
-			userService.addRoleToUser("piet", "ROLE_SUPER_ADMIN");
 			userService.addRoleToUser("piet", "ROLE_ADMIN");
-			userService.addRoleToUser("kees", "ROLE_MANAGER");
+			userService.addRoleToUser("piet", "ROLE_USER");
+			userService.addRoleToUser("kees", "ROLE_USER");
 			userService.addRoleToUser("hans", "ROLE_USER");
 		};
 	}

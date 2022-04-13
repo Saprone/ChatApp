@@ -1,0 +1,18 @@
+{
+    "eslintConfig": {
+        "root": true,
+        "env": {
+          "node": true
+        },
+        "extends": [
+          "plugin:vue/essential",
+          "eslint:recommended",
+          "plugin:prettier/recommended",
+          "@vue/pretier"
+        ],
+        "parserOptions": {
+          "parser": "babel-eslint"
+        },
+        "rules": {}
+      }
+}

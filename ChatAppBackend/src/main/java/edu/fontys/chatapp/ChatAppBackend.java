@@ -52,7 +52,7 @@ public class ChatAppBackend {
 
 	public Info apiInfo() {
 		Info info = new Info();
-		info.title("Springdoc Chat Application API").version("1.0");
+		info.title("Springdoc ChatApp API").version("1.0");
 
 		return info;
 	}

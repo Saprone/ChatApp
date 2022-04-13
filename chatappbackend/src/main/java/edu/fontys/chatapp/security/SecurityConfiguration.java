@@ -33,13 +33,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
 
         http.csrf().disable();
+
         http.sessionManagement().sessionCreationPolicy(STATELESS);
+
         http.authorizeHttpRequests()
             .antMatchers("/api/login/**", "/api/token/refresh/**").permitAll()
             .antMatchers(GET, "/api/users").permitAll()
             .antMatchers(POST, "/api/user/**").hasAnyAuthority("ROLE_ADMIN")
             .antMatchers(POST, "/api/role/**").hasAnyAuthority("ROLE_ADMIN")
             .anyRequest().authenticated();
+
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

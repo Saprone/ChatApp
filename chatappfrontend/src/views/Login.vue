@@ -18,6 +18,7 @@
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
 import User from '../models/user'
+import axios from 'axios'
 
 export default {
   name: 'LoginPage',
@@ -28,6 +29,7 @@ export default {
     }
   },
   created() {
+    this.authenticateUser()
     this.createWebsocketConnection()
   },  
   methods: {
@@ -51,6 +53,19 @@ export default {
     },
     sendMessageToServer() {
       this.stompClient.send("/app/user.input", JSON.stringify({ username: this.user.username }), {});
+    },
+    authenticateUser() {
+      const API_URL = 'http://localhost:8080/api/login';
+      var user = new User('admin', '1234');
+
+      return axios
+        .post(API_URL, { user })
+        .then(response => {
+          console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });  
     }
   }
 }

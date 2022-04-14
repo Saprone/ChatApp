@@ -40,7 +40,7 @@ export default {
       }
     },
     createWebsocketConnection() {
-      this.socket = new SockJS("http://localhost:8080/sockjs");
+      this.socket = new SockJS("http://localhost:8082/sockjs");
       this.stompClient = Stomp.over(this.socket);
 
       this.stompClient.connect({}, frame => {
@@ -56,7 +56,7 @@ export default {
       this.stompClient.send("/app/user.input", JSON.stringify({ username: this.user.username }), {});
     },
     authenticateUser() {
-      const API_URL = 'http://localhost:8080/api/login';
+      const API_URL = 'http://localhost:8082/api/login';
 
       const params = new URLSearchParams();
       params.append('username', 'admin');
@@ -64,7 +64,7 @@ export default {
 
       const config = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
       }
 

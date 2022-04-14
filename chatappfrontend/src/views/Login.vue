@@ -19,6 +19,7 @@ import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
 import User from '../models/user'
 import axios from 'axios'
+import TestService from '../services/TestService'
 
 export default {
   name: 'LoginPage',
@@ -30,13 +31,16 @@ export default {
   },
   created() { 
     this.createWebsocketConnection()
+    //this.authenticateUser()
   },  
   methods: {
     handleLogin() {
       if(this.stompClient && this.user != null) {
         //this.sendMessageToServer()
-
-        this.authenticateUser()
+        
+        TestService.getTestMessage().then((response) => {
+          console.log(response);
+        })
       }
     },
     createWebsocketConnection() {

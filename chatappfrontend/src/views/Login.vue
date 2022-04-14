@@ -24,18 +24,19 @@ export default {
   name: 'LoginPage',
   data: () => {
     return {
-      user: new User('', 'Passw0rd!'),
+      user: new User('placeholder', 'Passw0rd!'),
       usernames: [] 
     }
   },
-  created() {
-    this.authenticateUser()
+  created() { 
     this.createWebsocketConnection()
   },  
   methods: {
     handleLogin() {
       if(this.stompClient && this.user != null) {
-        this.sendMessageToServer()
+        //this.sendMessageToServer()
+
+        this.authenticateUser()
       }
     },
     createWebsocketConnection() {
@@ -56,16 +57,24 @@ export default {
     },
     authenticateUser() {
       const API_URL = 'http://localhost:8080/api/login';
-      var user = new User('admin', '1234');
 
-      return axios
-        .post(API_URL, { user })
-        .then(response => {
+      const params = new URLSearchParams();
+      params.append('username', 'admin');
+      params.append('password', '1234');
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+
+      axios.post(API_URL, params, config)
+        .then((response) => {
           console.log(response);
         })
         .catch((error) => {
-            console.log(error);
-        });  
+          console.log(error);
+        }) 
     }
   }
 }

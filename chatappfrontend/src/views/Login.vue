@@ -31,7 +31,6 @@ export default {
   },
   created() { 
     this.createWebsocketConnection()
-    //this.authenticateUser()
   },  
   methods: {
     handleLogin() {
@@ -62,27 +61,6 @@ export default {
     },
     sendMessageToServer() {
       this.stompClient.send("/app/user.input", JSON.stringify({ username: this.user.username }), {});
-    },
-    authenticateUser() {
-      const API_URL = 'http://localhost:8082/api/login';
-
-      const params = new URLSearchParams();
-      params.append('username', 'admin');
-      params.append('password', '1234');
-
-      const config = {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        }
-      }
-
-      axios.post(API_URL, params, config)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        }) 
     }
   }
 }

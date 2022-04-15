@@ -18,8 +18,8 @@
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
 import User from '../models/user'
-import axios from 'axios'
 import TestService from '../services/TestService'
+import AuthenticationService from '../services/AuthenticationService'
 
 export default {
   name: 'LoginPage',
@@ -39,6 +39,10 @@ export default {
         //this.sendMessageToServer()
         
         TestService.getTestMessage().then((response) => {
+          console.log(response);
+        })
+
+        AuthenticationService.authenticateUser('admin', '1234').then((response) => {
           console.log(response);
         })
       }

@@ -29,12 +29,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class UserController {
     private final UserService userService;
 
-    @MessageMapping("/user.input")
-    @SendTo("/topic/user")
-    public String UserModel(User userModel) {
-        return userModel.getUsername();
-    }
-
     @GetMapping("/users")
     public ResponseEntity<List<User>>getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());

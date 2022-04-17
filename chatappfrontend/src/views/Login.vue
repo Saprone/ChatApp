@@ -15,8 +15,6 @@
 </template> 
 
 <script>
-import SockJS from 'sockjs-client'
-import Stomp from 'webstomp-client'
 import User from '../models/user'
 import AuthenticationService from '../services/AuthenticationService'
 
@@ -24,38 +22,16 @@ export default {
   name: 'LoginPage',
   data: () => {
     return {
-      user: new User('placeholder', 'Passw0rd!'),
-      usernames: [] 
+      user: new User('admin', '1234')
     }
-  },
-  created() { 
-    this.createWebsocketConnection()
   },  
   methods: {
     handleLogin() {
-      if(this.stompClient && this.user != null) {
-        this.sendMessageToServer();
-
-        /*AuthenticationService.authenticateUser('admin', '1234').then((response) => {
+      if(this.user != null) {
+        AuthenticationService.authenticateUser(this.user.username, this.user.password).then((response) => {
           console.log(response);
-        })*/
+        })
       }
-    },
-    createWebsocketConnection() {
-      this.socket = new SockJS("http://localhost:8082/sockjs");
-      this.stompClient = Stomp.over(this.socket);
-
-      this.stompClient.connect({}, frame => {
-        this.stompClient.subscribe("/topic/user", payload => {
-          if(payload.body !== null) {
-            this.usernames.push(payload.body);
-            //this.$router.push({name: "Chatroom", params: { data: this.usernames }}).catch(()=>{});
-          }
-        });
-      });
-    },
-    sendMessageToServer() {
-      this.stompClient.send("/app/user.input", JSON.stringify({ username: this.user.username }), {});
     }
   }
 }

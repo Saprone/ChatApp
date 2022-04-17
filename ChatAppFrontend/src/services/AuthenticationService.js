@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = "http://localhost:8082/api/login";
 
-export default class AuthenticationService {
+export default new class AuthenticationService {
     authenticateUser(username, password) {   
         const params = new URLSearchParams();
         params.append('username', username);
@@ -10,7 +10,7 @@ export default class AuthenticationService {
 
         const config = {
             headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
         }    
         

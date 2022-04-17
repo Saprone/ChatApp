@@ -29,7 +29,10 @@ export default {
     handleLogin() {
       if(this.user != null) {
         AuthenticationService.authenticateUser(this.user.username, this.user.password).then((response) => {
-          console.log(response);
+          console.log("Access_token:"); 
+          console.log(response.data.access_token);
+          console.log("Refresh_token:"); 
+          console.log(response.data.refresh_token);
         })
       }
     }

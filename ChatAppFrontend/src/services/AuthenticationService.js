@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = "http://localhost:8082/api/login";
 
-class AuthenticationService {
+export default class AuthenticationService {
     authenticateUser(username, password) {   
         const params = new URLSearchParams();
         params.append('username', username);
@@ -17,5 +17,3 @@ class AuthenticationService {
         return axios.post(API_URL, params, config)
     }
 }
-
-export default new AuthenticationService()

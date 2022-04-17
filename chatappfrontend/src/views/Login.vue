@@ -18,7 +18,6 @@
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
 import User from '../models/user'
-import TestService from '../services/TestService'
 import AuthenticationService from '../services/AuthenticationService'
 
 export default {
@@ -35,15 +34,11 @@ export default {
   methods: {
     handleLogin() {
       if(this.stompClient && this.user != null) {
-        //this.sendMessageToServer()
-        
-        TestService.getTestMessage().then((response) => {
-          console.log(response);
-        })
+        this.sendMessageToServer();
 
-        AuthenticationService.authenticateUser('admin', '1234').then((response) => {
+        /*AuthenticationService.authenticateUser('admin', '1234').then((response) => {
           console.log(response);
-        })
+        })*/
       }
     },
     createWebsocketConnection() {
@@ -54,7 +49,7 @@ export default {
         this.stompClient.subscribe("/topic/user", payload => {
           if(payload.body !== null) {
             this.usernames.push(payload.body);
-            this.$router.push({name: "Chatroom", params: { data: this.usernames }}).catch(()=>{});
+            //this.$router.push({name: "Chatroom", params: { data: this.usernames }}).catch(()=>{});
           }
         });
       });

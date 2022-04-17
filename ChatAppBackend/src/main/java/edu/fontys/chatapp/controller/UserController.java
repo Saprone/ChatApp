@@ -25,7 +25,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RestController @RequestMapping("/api") @RequiredArgsConstructor @CrossOrigin("http://localhost:8081/")
+@RestController @RequestMapping("/api") @RequiredArgsConstructor @CrossOrigin("http://localhost:8082/")
 public class UserController {
     private final UserService userService;
 
@@ -33,11 +33,6 @@ public class UserController {
     @SendTo("/topic/user")
     public String UserModel(User userModel) {
         return userModel.getUsername();
-    }
-
-    @GetMapping("/test")
-    public String TestMethod() {
-        return "test";
     }
 
     @GetMapping("/users")

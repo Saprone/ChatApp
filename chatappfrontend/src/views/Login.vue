@@ -15,8 +15,8 @@
 </template> 
 
 <script>
-import User from '../models/user'
-import AuthenticationService from '../services/AuthenticationService'
+import User from "../models/user";
+import AuthenticationService from "../services/AuthenticationService";
 
 export default {
   name: 'LoginPage',
@@ -28,12 +28,12 @@ export default {
   methods: {
     handleLogin() {
       if(this.user != null) {
-        AuthenticationService.authenticateUser(this.user.username, this.user.password).then((response) => {
-          console.log("Access_token:"); 
-          console.log(response.data.access_token);
-          console.log("Refresh_token:"); 
-          console.log(response.data.refresh_token);
-        })
+        AuthenticationService.authenticateUser(this.user);
+
+        console.log("Access_token:"); 
+        console.log(localStorage.access_token);
+        console.log("Refresh_token:"); 
+        console.log(localStorage.refresh_token);
       }
     }
   }

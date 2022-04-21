@@ -24,4 +24,19 @@ export default new class AuthenticationService {
                 console.log(error);
             })
     }
+    async refreshAccesTokenUser() {
+        return await axios
+            .get("http://localhost:8083/api/" + "token/refresh", {
+                headers: {
+                    authorization: `Bearer ${localStorage.refresh_token}`,
+                }
+            })
+            .then(response => {
+                localStorage.new_access_token = response.data.access_token;
+                localStorage.new_refresh_token = response.data.refresh_token;  
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 }

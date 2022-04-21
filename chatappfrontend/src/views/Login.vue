@@ -29,11 +29,17 @@ export default {
     handleLogin() {
       if(this.user != null) {
         AuthenticationService.authenticateUser(this.user);
+        AuthenticationService.refreshAccesTokenUser();
 
-        console.log("Access_token:"); 
+        console.log("Initial_access_token:"); 
         console.log(localStorage.access_token);
-        console.log("Refresh_token:"); 
+        console.log("Initial_refresh_token:"); 
         console.log(localStorage.refresh_token);
+
+        console.log("New_access_token:"); 
+        console.log(localStorage.new_access_token);
+        console.log("New_refresh_token:"); 
+        console.log(localStorage.new_refresh_token);
       }
     }
   }

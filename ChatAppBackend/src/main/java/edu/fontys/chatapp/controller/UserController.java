@@ -23,7 +23,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RestController @RequestMapping("/api") @RequiredArgsConstructor @CrossOrigin("http://localhost:8082/")
+@RestController @RequestMapping("/api") @RequiredArgsConstructor @CrossOrigin("http://localhost:8083/")
 public class UserController {
     private final UserService userService;
 

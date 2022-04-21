@@ -12,7 +12,7 @@ export default new class AuthenticationService {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
-        };    
+        }   
   
         return await axios
             .post(API_URL + "login", params, config)
@@ -22,6 +22,6 @@ export default new class AuthenticationService {
             })
             .catch((error) => {
                 console.log(error);
-            });
-    };
-};
+            })
+    }
+}

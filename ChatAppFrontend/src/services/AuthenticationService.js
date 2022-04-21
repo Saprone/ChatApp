@@ -26,7 +26,7 @@ export default new class AuthenticationService {
     }
     async refreshAccesTokenUser() {
         return await axios
-            .get("http://localhost:8083/api/" + "token/refresh", {
+            .get("http://localhost:8082/api/" + "token/refresh", {
                 headers: {
                     authorization: `Bearer ${localStorage.refresh_token}`,
                 }

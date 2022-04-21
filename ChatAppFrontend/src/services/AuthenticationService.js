@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const API_URL = "http://localhost:8082/api/";
-
 export default new class AuthenticationService {
     async authenticateUser(user) {   
         const params = new URLSearchParams();
@@ -12,16 +10,16 @@ export default new class AuthenticationService {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
-        };    
+        }    
   
         return await axios
-            .post(API_URL + "login", params, config)
+            .post("http://localhost:8082/api/login", params, config)
             .then((response) => {
                 localStorage.access_token = response.data.access_token;
                 localStorage.refresh_token = response.data.refresh_token;         
             })
             .catch((error) => {
                 console.log(error);
-            });
-    };
-};
+            })
+    }
+}

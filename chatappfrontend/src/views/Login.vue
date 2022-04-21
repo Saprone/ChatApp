@@ -17,6 +17,7 @@
 <script>
 import User from "../models/user";
 import AuthenticationService from "../services/AuthenticationService";
+import TestService from "../services/TestService";
 
 export default {
   name: 'LoginPage',
@@ -29,11 +30,10 @@ export default {
     handleLogin() {
       if(this.user != null) {
         AuthenticationService.authenticateUser(this.user);
-
-        console.log("Access_token:"); 
-        console.log(localStorage.access_token);
-        console.log("Refresh_token:"); 
-        console.log(localStorage.refresh_token);
+        
+        TestService.getTestMessage().then((response) => {
+          console.log(response);
+        })
       }
     }
   }

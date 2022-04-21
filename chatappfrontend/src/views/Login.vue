@@ -17,6 +17,7 @@
 <script>
 import User from "../models/user";
 import AuthenticationService from "../services/AuthenticationService";
+import UserService from "../services/UserService";
 
 export default {
   name: 'LoginPage',
@@ -30,7 +31,7 @@ export default {
       if(this.user != null) {
         AuthenticationService.authenticateUser(this.user);
         AuthenticationService.refreshAccesTokenUser();
-
+        
         console.log("Initial_access_token:"); 
         console.log(localStorage.access_token);
         console.log("Initial_refresh_token:"); 
@@ -40,6 +41,8 @@ export default {
         console.log(localStorage.new_access_token);
         console.log("New_refresh_token:"); 
         console.log(localStorage.new_refresh_token);
+
+        UserService.getUsers();
       }
     }
   }

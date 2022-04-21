@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
             source.registerCorsConfiguration("/api/login", config);
             source.registerCorsConfiguration("/api/token/refresh", config);
+            source.registerCorsConfiguration("/api/users", config);
         }
 
         return source;

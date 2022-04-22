@@ -29,8 +29,8 @@ export default {
   methods: {
     handleLogin() {
       if(this.user != null) {        
-        AuthenticationService.authenticateUser(this.user).then(response => {
-              if(response) {
+        AuthenticationService.authenticateUser(this.user).then(userIsAuthenticated => {
+              if(userIsAuthenticated) {
                 AuthenticationService.refreshAccesTokenUser();  
                 UserService.getUsers(); 
               } 

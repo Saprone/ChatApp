@@ -7,6 +7,10 @@
           <input v-model="user.username" type="text" name="username" required/>  
         </div>
         <div class="section">
+          <label>Password:</label>
+          <input v-model="user.password" type="password" name="password" required/>  
+        </div>
+        <div class="section">
           <button type="login">Login</button>
         </div>
       </form>

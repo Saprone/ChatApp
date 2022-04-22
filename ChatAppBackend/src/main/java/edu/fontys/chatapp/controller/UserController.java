@@ -11,6 +11,8 @@ import edu.fontys.chatapp.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController @RequestMapping("/api") @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @MessageMapping("/user.input")
+    @SendTo("/topic/user")
+    public String UserModel(User user) {
+        return user.getUsername();
+    }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>>getUsers() {

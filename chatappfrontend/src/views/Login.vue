@@ -28,21 +28,13 @@ export default {
   },  
   methods: {
     handleLogin() {
-      if(this.user != null) {
-        AuthenticationService.authenticateUser(this.user);
-        AuthenticationService.refreshAccesTokenUser();
-        
-        console.log("Initial_access_token:"); 
-        console.log(localStorage.access_token);
-        console.log("Initial_refresh_token:"); 
-        console.log(localStorage.refresh_token);
-
-        console.log("New_access_token:"); 
-        console.log(localStorage.new_access_token);
-        console.log("New_refresh_token:"); 
-        console.log(localStorage.new_refresh_token);
-
-        UserService.getUsers();
+      if(this.user != null) {        
+        AuthenticationService.authenticateUser(this.user).then(response => {
+              if(response) {
+                AuthenticationService.refreshAccesTokenUser();  
+                UserService.getUsers(); 
+              } 
+          })
       }
     }
   }

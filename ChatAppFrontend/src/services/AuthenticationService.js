@@ -17,23 +17,31 @@ export default new class AuthenticationService {
         return await axios
             .post(API_URL + "login", params, config)
             .then((response) => {
+                console.log("Initial_access_token:"); 
+                console.log(response.data.access_token);
+                console.log("Initial_refresh_token:"); 
+                console.log(response.data.refresh_token);
+
                 localStorage.access_token = response.data.access_token;
-                localStorage.refresh_token = response.data.refresh_token;         
+                return true;
             })
             .catch((error) => {
                 console.log(error);
+                return false;
             })
     }
     async refreshAccesTokenUser() {
         return await axios
             .get(API_URL + "token/refresh", {
                 headers: {
-                    authorization: `Bearer ${localStorage.refresh_token}`,
+                    authorization: `Bearer ${localStorage.access_token}`,
                 }
             })
             .then(response => {
-                localStorage.new_access_token = response.data.access_token;
-                localStorage.new_refresh_token = response.data.refresh_token;  
+                console.log("Refreshed_access_token:"); 
+                console.log(response.data.access_token);
+                console.log("Refreshed_refresh_token:"); 
+                console.log(response.data.refresh_token);
             })
             .catch(error => {
                 console.log(error)

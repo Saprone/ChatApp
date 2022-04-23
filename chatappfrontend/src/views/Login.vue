@@ -53,6 +53,9 @@ export default {
                 this.sendMessageToServer(); 
               } 
           })
+          .catch(error => {
+            console.log(error)
+          })
       }
     },
     createWebsocketConnection() {

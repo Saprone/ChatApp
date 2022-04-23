@@ -39,6 +39,9 @@ export default {
                 UserService.getUsers(); 
               } 
           })
+          .catch(error => {
+            console.log(error)
+          })
       }
     }
   }

@@ -1,6 +1,6 @@
 package edu.fontys.chatapp.config;
 
-/*import edu.fontys.chatapp.ChatAppBackend;
+import edu.fontys.chatapp.ChatAppBackend;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
@@ -22,7 +22,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @WebAppConfiguration
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WebSocketConfigurationTest {
-	static final String WEBSOCKET_URI = "http://localhost:8080/sockjs";
+	static final String WEBSOCKET_URI = "http://localhost:8082/sockjs";
 	static final String WEBSOCKET_TOPIC = "/topic";
 
 	BlockingQueue<String> blockingQueue;
@@ -63,4 +63,4 @@ public class WebSocketConfigurationTest {
 
 		Assertions.assertEquals(message, blockingQueue.poll(1, SECONDS));
 	}
-}*/
+}

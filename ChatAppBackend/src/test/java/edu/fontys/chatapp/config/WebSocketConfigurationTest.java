@@ -3,8 +3,11 @@ package edu.fontys.chatapp.config;
 import edu.fontys.chatapp.ChatAppBackend;
 import edu.fontys.chatapp.controller.UserController;
 import edu.fontys.chatapp.model.User;
+import edu.fontys.chatapp.service.UserService;
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -29,6 +32,9 @@ public class WebSocketConfigurationTest {
 
 	BlockingQueue<String> blockingQueue;
 	WebSocketStompClient webSocketStompClient;
+
+	@MockBean
+	private UserService userService;
 
 	@BeforeEach
 	public void setUp() {

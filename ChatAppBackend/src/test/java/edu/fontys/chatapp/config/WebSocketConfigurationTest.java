@@ -1,6 +1,8 @@
 package edu.fontys.chatapp.config;
 
 import edu.fontys.chatapp.ChatAppBackend;
+import edu.fontys.chatapp.controller.UserController;
+import edu.fontys.chatapp.model.User;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
@@ -18,7 +20,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-@SpringBootTest(classes = ChatAppBackend.class)
+@SpringBootTest(classes = { WebSocketConfiguration.class, UserController.class, User.class })
 @WebAppConfiguration
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WebSocketConfigurationTest {

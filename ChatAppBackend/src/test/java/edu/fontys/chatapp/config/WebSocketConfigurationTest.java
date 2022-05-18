@@ -12,19 +12,16 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
-
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
-
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 @SpringBootTest(classes = ChatAppBackend.class)
 @WebAppConfiguration
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WebSocketConfigurationTest {
-
 	static final String WEBSOCKET_URI = "http://localhost:8080/sockjs";
 	static final String WEBSOCKET_TOPIC = "/topic";
 
@@ -34,6 +31,7 @@ public class WebSocketConfigurationTest {
 	@BeforeEach
 	public void setUp() {
 		blockingQueue = new LinkedBlockingDeque<>();
+
 		webSocketStompClient =
 			new WebSocketStompClient(
 			new SockJsClient(List.of(
@@ -62,6 +60,7 @@ public class WebSocketConfigurationTest {
 
 		String message = "message";
 		session.send(WEBSOCKET_TOPIC, message.getBytes());
+
 		Assertions.assertEquals(message, blockingQueue.poll(1, SECONDS));
 	}
 }*/

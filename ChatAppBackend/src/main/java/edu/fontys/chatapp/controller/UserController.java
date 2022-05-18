@@ -1,85 +1,113 @@
 package edu.fontys.chatapp.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
+import edu.fontys.chatapp.service.UserService;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URI;
+import java.util.*;
+import java.util.stream.Collectors;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.UUID;
-
-@RestController
-@Tag(name = "User")
+@RestController @RequestMapping("/api") @RequiredArgsConstructor
 public class UserController {
+    private final UserService userService;
 
     @MessageMapping("/user.input")
     @SendTo("/topic/user")
-    public String UserModel(User userModel) throws Exception {
-        return userModel.getUsername();
+    public String UserModel(User user) {
+        return user.getUsername();
     }
 
-    //private final UserService userService;
+    @GetMapping("/users")
+    public ResponseEntity<List<User>>getUsers() {
+        return ResponseEntity.ok().body(userService.getUsers());
+    }
 
-    @GetMapping("/user/get/{id}")
-    @Operation(summary = "get user with specified id")
-    public ResponseEntity<User> getUserById(@PathVariable UUID id) {
-        if (id != null) {
-            User user = new User();
-            user.setId(id);
-            user.setUsername("User"+id);
-            user.setRoom("DefaultRoom");
+    @PostMapping("/user/save")
+    public ResponseEntity<User>saveUser(@RequestBody User user) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
 
-            return ResponseEntity.ok(user);
-            //return userService.getUserById(id);
+        return ResponseEntity.created(uri).body(userService.saveUser(user));
+    }
+
+    @PostMapping("/role/save")
+    public ResponseEntity<Role>saveRole(@RequestBody Role role) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
+
+        return ResponseEntity.created(uri).body(userService.saveRole(role));
+    }
+
+    @PostMapping("/role/addroletouser")
+    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+        userService.addRoleToUser(form.getUsername(), form.getRoleName());
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/token/refresh")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String autohorizationHeader = request.getHeader(AUTHORIZATION);
+
+        if(autohorizationHeader != null && autohorizationHeader.startsWith("Bearer ")) {
+            try {
+                String refresh_token = autohorizationHeader.substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                JWTVerifier verifier = JWT.require(algorithm).build();
+                DecodedJWT decodedJWT = verifier.verify(refresh_token);
+
+                String username = decodedJWT.getSubject();
+                User user = userService.getUser(username);
+
+                String access_token = JWT.create()
+                        .withSubject(user.getUsername())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                        .withIssuer(request.getRequestURL().toString())
+                        .withClaim("roles", user.getRoles().stream().map(Role::getRolename).collect(Collectors.toList()))
+                        .sign(algorithm);
+
+                Map<String, String> tokens = new HashMap<>();
+                tokens.put("access_token", access_token);
+                tokens.put("refresh_token", refresh_token);
+
+                response.setContentType(APPLICATION_JSON_VALUE);
+
+                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+            } catch(Exception exception) {
+                response.setHeader("error", exception.getMessage());
+                response.setStatus(FORBIDDEN.value());
+
+                Map<String, String> error = new HashMap<>();
+                error.put("error_message", exception.getMessage());
+
+                response.setContentType(APPLICATION_JSON_VALUE);
+
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
         } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
+            throw new RuntimeException("Refresh token is missing");
         }
     }
+}
 
-    @DeleteMapping("/user/delete/{id}")
-    @Operation(summary = "delete user with specified id")
-    public void deleteUser(@PathVariable UUID id) {
-        if (id != null) {
-            //userService.deleteUser(id);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
-        }
-    }
-
-    @PostMapping("/user/register")
-    @Operation(summary = "register user with specified name, password and room")
-    public void registerUser(@RequestBody User user) {
-        if (user != null) {
-            //userService.registerUser(user);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
-        }
-    }
-
-    @PostMapping("/user/login")
-    @Operation(summary = "login user with specified name, password and room")
-    public void loginUser(@RequestBody User user) {
-        if (user != null) {
-            //userService.loginUser(user);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
-        }
-    }
-
-    @PutMapping("/user/update")
-    @Operation(summary = "update user with specified name, password")
-    public void updateUser(@RequestBody User user) {
-        if (user != null) {
-            //userService.updateUser(user);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not found");
-        }
-    }
+@Data
+class RoleToUserForm {
+    private String username;
+    private String roleName;
 }

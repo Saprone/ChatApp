@@ -4,11 +4,11 @@
       <form action="#" @submit.prevent="handleLogin">
         <div class="section">
           <label>Username:</label>
-          <input v-model="user.username" type="text" name="username" required/>  
+          <input v-model="user.username" type="text" name="username" ref="username" required/>  
         </div>
         <div class="section">
           <label>Password:</label>
-          <input v-model="user.password" type="password" name="password" required/>  
+          <input v-model="user.password" type="password" name="password" ref="password" required/>  
         </div>
         <div class="section">
           <button type="login">Login</button>

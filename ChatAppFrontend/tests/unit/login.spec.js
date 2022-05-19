@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import Login from '@/views/Login.vue'
 
 describe('Login.vue', () => {
-  it('sets the username', () => {
+  it('test username input', () => {
     const wrapper = mount(Login)
     const input_username = wrapper.find({ref: 'username'})
     input_username.setValue('admin')
@@ -11,11 +11,11 @@ describe('Login.vue', () => {
   })
 })
 describe('Login.vue', () => {
-  it('sets the password', () => {
+  it('test password input', () => {
     const wrapper = mount(Login)
     const input_password = wrapper.find({ref: 'password'})
     input_password.setValue('1234')
 
     expect(input_password.element.value).toBe('1234')
   })
-})  
+}) 

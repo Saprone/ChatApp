@@ -28,9 +28,9 @@
 <script>
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
-import User from "../models/user";
-import AuthenticationService from "../services/AuthenticationService";
-import UserService from "../services/UserService";
+import User from "../models/user"
+import AuthenticationService from "../services/AuthenticationService"
+import UserService from "../services/UserService"
 
 export default {
   name: 'LoginPage',
@@ -48,7 +48,7 @@ export default {
       if(this.stompClient && this.user != null) {        
         AuthenticationService.authenticateUser(this.user).then(userIsAuthenticated => {
               if(userIsAuthenticated && this.usernames.includes(this.user.username) == false) {
-                AuthenticationService.refreshAccesTokenUser();  
+                //AuthenticationService.refreshAccesTokenUser();  
                 UserService.getUsers();
                 this.sendMessageToServer(); 
               } 

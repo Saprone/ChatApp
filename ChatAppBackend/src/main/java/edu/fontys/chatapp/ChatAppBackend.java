@@ -18,11 +18,7 @@ import java.util.ArrayList;
 public class ChatAppBackend {
 
 	public static void main(String[] args) {
-		try {
-			SpringApplication.run(ChatAppBackend.class, args);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		SpringApplication.run(ChatAppBackend.class, args);
 	}
 
 	@Bean

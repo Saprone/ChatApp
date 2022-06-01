@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
-        if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
+        if (config.getAllowedOrigins() != null) {
             source.registerCorsConfiguration("/api/login", config);
             source.registerCorsConfiguration("/api/token/refresh", config);
             source.registerCorsConfiguration("/api/users", config);

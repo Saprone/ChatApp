@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.service.UserService;
+import io.swagger.v3.oas.models.responses.ApiResponse;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UserController {
 
     @MessageMapping("/user.input")
     @SendTo("/topic/user")
-    public String UserModel(User user) {
+    public String userModel(User user) {
         return user.getUsername();
     }
 
@@ -55,10 +56,10 @@ public class UserController {
     }
 
     @PostMapping("/role/addroletouser")
-    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+    public void addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
 
-        return ResponseEntity.ok().build();
+        ResponseEntity.ok().build();
     }
 
     @GetMapping("/token/refresh")
@@ -67,15 +68,15 @@ public class UserController {
 
         if(autohorizationHeader != null && autohorizationHeader.startsWith("Bearer ")) {
             try {
-                String refresh_token = autohorizationHeader.substring("Bearer ".length());
+                String refreshToken = autohorizationHeader.substring("Bearer ".length());
                 Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
-                DecodedJWT decodedJWT = verifier.verify(refresh_token);
+                DecodedJWT decodedJWT = verifier.verify(refreshToken);
 
                 String username = decodedJWT.getSubject();
                 User user = userService.getUser(username);
 
-                String access_token = JWT.create()
+                String accessToken = JWT.create()
                         .withSubject(user.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
@@ -83,8 +84,8 @@ public class UserController {
                         .sign(algorithm);
 
                 Map<String, String> tokens = new HashMap<>();
-                tokens.put("access_token", access_token);
-                tokens.put("refresh_token", refresh_token);
+                tokens.put("access_token", accessToken);
+                tokens.put("refresh_token", refreshToken);
 
                 response.setContentType(APPLICATION_JSON_VALUE);
 
@@ -101,7 +102,7 @@ public class UserController {
                 new ObjectMapper().writeValue(response.getOutputStream(), error);
             }
         } else {
-            throw new RuntimeException("Refresh token is missing");
+            throw new NoSuchElementException("Refresh token is missing");
         }
     }
 }

@@ -26,7 +26,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @SpringBootTest(classes = { WebSocketConfiguration.class, UserController.class, User.class })
 @WebAppConfiguration
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class WebSocketConfigurationTest {
+class WebSocketConfigurationTest {
 	static final String WEBSOCKET_URI = "http://localhost:8082/sockjs";
 	static final String WEBSOCKET_TOPIC = "/topic";
 
@@ -49,7 +49,7 @@ public class WebSocketConfigurationTest {
 	}
 
 	@Test
-	public void testMessageIsReceived() throws Exception {
+	void testMessageIsReceived() throws Exception {
 		StompSession session = webSocketStompClient
 			.connect(WEBSOCKET_URI, new StompSessionHandlerAdapter() {})
 			.get(1, SECONDS);

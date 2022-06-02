@@ -20,8 +20,8 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '16'
-        distribution: 'adopt'
+        distribution: 'temurin'
 
     - name: Build with Gradle
       working-directory: ./ChatAppBackend
-      run: awk '/^version/{gsub(/\"/,"",$2);print $2}' gradle --build-cache assemble
+      run: awk '/^version/{gsub(/\"/,"",$2);print $2}' build.gradle

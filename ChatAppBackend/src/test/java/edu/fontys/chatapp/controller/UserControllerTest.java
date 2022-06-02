@@ -3,9 +3,9 @@ package edu.fontys.chatapp.controller;
 import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.repository.UserRepository;
 import edu.fontys.chatapp.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -14,13 +14,12 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
-@Slf4j
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
     @InjectMocks
@@ -29,29 +28,31 @@ class UserControllerTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private UserRepository userRepository;
+
     @Test
     void saveUserTest()
     {
         //given
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
         User user = new User(null, "admin", "1234", "room1", new ArrayList<>(), new ArrayList<>());
 
         //when
+        userRepository.save(user);
+
         when(userService.saveUser(any(User.class))).thenReturn(user);
         ResponseEntity<User> responseEntity = userController.saveUser(user);
 
         //then
+        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+        verify(userRepository).save(userArgumentCaptor.capture());
+        User capturedUser = userArgumentCaptor.getValue();
+        assertThat(capturedUser).isEqualTo(user);
+
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
         assertThat(Objects.requireNonNull(responseEntity.getHeaders().getLocation()).getPath()).isEqualTo("/api/user/save");
-    }
-
-    @Test
-    void getUsersTest() {
-        //when
-        ResponseEntity<List<User>> responseEntity = userController.getUsers();
-
-        //then
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
     }
 }

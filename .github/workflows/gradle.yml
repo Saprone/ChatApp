@@ -29,6 +29,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Build with Gradle
-      run: | 
-         ./gradlew wrapper --gradle-version=7.3.1
-         ./gradlew build
+      run: gradle wrapper --gradle-version 7.3.1
+

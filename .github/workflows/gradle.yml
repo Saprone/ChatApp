@@ -28,8 +28,3 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        
-    - name: Build with Gradle
-      working-directory: ./ChatAppBackend
-      run: gradle build
-

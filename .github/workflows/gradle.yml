@@ -24,4 +24,4 @@ jobs:
 
     - name: Build with Gradle
       working-directory: ./ChatAppBackend
-      run: build.gradle
+      run: awk '/^version/{gsub(/\"/,"",$2);print $2}' build.gradle

@@ -39,14 +39,7 @@ class UserServiceImplementationTest {
     @Test
     void saveUserTest() {
         //given
-        User user = new User(
-                null,
-                "admin",
-                "1234",
-                "room1",
-                new ArrayList<>(),
-                new ArrayList<>()
-        );
+        User user = new User(null, "admin", "1234", "room1", new ArrayList<>(), new ArrayList<>());
 
         //when
         userRepository.save(user);

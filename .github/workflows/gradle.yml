@@ -24,4 +24,4 @@ jobs:
         
     - name: Build with Gradle
       working-directory: ./ChatAppBackend
-      run: gradle wrapper --gradle-version 7.3.1
+      run: gradle build --gradle-version 7.3.1

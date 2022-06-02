@@ -23,4 +23,5 @@ jobs:
         distribution: 'temurin'
         
     - name: Build with Gradle 
+      working-directory: ./ChatAppBackend
       run: gradle wrapper --gradle-version 7.3.1

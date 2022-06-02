@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.service.UserService;
-import io.swagger.v3.oas.models.responses.ApiResponse;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

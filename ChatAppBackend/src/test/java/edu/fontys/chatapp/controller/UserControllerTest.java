@@ -14,6 +14,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,5 +44,14 @@ class UserControllerTest {
         //then
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
         assertThat(Objects.requireNonNull(responseEntity.getHeaders().getLocation()).getPath()).isEqualTo("/api/user/save");
+    }
+
+    @Test
+    void getUsersTest() {
+        //when
+        ResponseEntity<List<User>> responseEntity = userController.getUsers();
+
+        //then
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
     }
 }

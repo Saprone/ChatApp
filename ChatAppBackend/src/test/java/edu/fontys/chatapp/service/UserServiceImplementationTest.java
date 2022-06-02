@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
 
-public class UserServiceImplementationTest {
+class UserServiceImplementationTest {
     @Mock
     private UserRepository userRepository;
     private AutoCloseable autoCloseable;

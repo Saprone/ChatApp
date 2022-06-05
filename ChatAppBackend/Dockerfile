@@ -1,7 +1,6 @@
 FROM openjdk:12-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
+ADD build/libs/ChatApp-1.0-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 # build the application jar file:  gradle clean build jar

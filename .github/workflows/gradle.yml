@@ -42,7 +42,11 @@ jobs:
       working-directory: ./ChatAppBackend
       run: gradle wrapper --gradle-version 7.3.1
       
-    - name: run backend tests 
+    - name: Run backend tests 
       working-directory: ./ChatAppBackend
       run: gradle test
+
+    - name: Run Jacoco test reports 
+      working-directory: ./ChatAppBackend
+      run: gradle jacocoTestReport
 

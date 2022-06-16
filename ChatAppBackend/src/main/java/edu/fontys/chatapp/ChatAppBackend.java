@@ -1,8 +1,8 @@
 package edu.fontys.chatapp;
 
-import edu.fontys.chatapp.models.Role;
-import edu.fontys.chatapp.models.User;
-import edu.fontys.chatapp.services.UserService;
+import edu.fontys.chatapp.model.Role;
+import edu.fontys.chatapp.model.User;
+import edu.fontys.chatapp.service.UserService;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.springframework.boot.CommandLineRunner;

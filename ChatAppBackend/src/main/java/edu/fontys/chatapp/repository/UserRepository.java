@@ -1,6 +1,6 @@
-package edu.fontys.chatapp.repositorys;
+package edu.fontys.chatapp.repository;
 
-import edu.fontys.chatapp.models.User;
+import edu.fontys.chatapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

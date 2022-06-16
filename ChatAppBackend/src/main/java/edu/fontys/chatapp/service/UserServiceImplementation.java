@@ -1,9 +1,9 @@
-package edu.fontys.chatapp.services;
+package edu.fontys.chatapp.service;
 
-import edu.fontys.chatapp.models.Role;
-import edu.fontys.chatapp.models.User;
-import edu.fontys.chatapp.repositorys.RoleRepository;
-import edu.fontys.chatapp.repositorys.UserRepository;
+import edu.fontys.chatapp.model.Role;
+import edu.fontys.chatapp.model.User;
+import edu.fontys.chatapp.repository.RoleRepository;
+import edu.fontys.chatapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

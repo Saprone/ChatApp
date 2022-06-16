@@ -1,13 +1,13 @@
-package edu.fontys.chatapp.controllers;
+package edu.fontys.chatapp.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.fontys.chatapp.models.Role;
-import edu.fontys.chatapp.models.User;
-import edu.fontys.chatapp.services.UserService;
+import edu.fontys.chatapp.model.Role;
+import edu.fontys.chatapp.model.User;
+import edu.fontys.chatapp.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

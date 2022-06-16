@@ -1,4 +1,4 @@
-package edu.fontys.chatapp.configs;
+package edu.fontys.chatapp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

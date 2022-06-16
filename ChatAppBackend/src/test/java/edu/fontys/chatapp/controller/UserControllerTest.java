@@ -1,6 +1,6 @@
 package edu.fontys.chatapp.controller;
 
-import edu.fontys.chatapp.models.User;
+import edu.fontys.chatapp.model.User;
 import edu.fontys.chatapp.repository.UserRepository;
 import edu.fontys.chatapp.service.UserService;
 import org.junit.jupiter.api.Test;

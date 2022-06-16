@@ -28,9 +28,9 @@
 <script>
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
-import User from "../models/user"
-import AuthenticationService from "../services/AuthenticationService"
-import UserService from "../services/UserService"
+import User from '../models/user'
+import AuthenticationService from '../services/AuthenticationService'
+import UserService from '../services/UserService'
 
 export default {
   name: 'LoginPage',

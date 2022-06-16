@@ -28,7 +28,7 @@
 <script>
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
-import User from '../model/user'
+import User from '../models/user'
 import AuthenticationService from '../services/AuthenticationService'
 import UserService from '../services/UserService'
 

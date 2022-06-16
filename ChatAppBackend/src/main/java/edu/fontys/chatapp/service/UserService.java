@@ -1,4 +1,4 @@
-package edu.fontys.chatapp.services;
+package edu.fontys.chatapp.service;
 
 import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;

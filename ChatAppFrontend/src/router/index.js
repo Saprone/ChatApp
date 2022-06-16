@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Test from '../services/Test.vue'
-/*import Dashboardchatroom from './views/DashboardChatroom.vue'
-import Dashboardusers from './views/DashboardUsers.vue'
-import Login from './views/Login.vue'
-import Register from './views/Register.vue'
+import Chatroom from '../pages/Chatroom.vue'
+import Dashboardchatroom from '../pages/DashboardChatroom.vue'
+import Dashboardusers from '../pages/DashboardUsers.vue'
+import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +41,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes: routes,
   linkActiveClass: 'active'
-})*/
+})
 
 export default router

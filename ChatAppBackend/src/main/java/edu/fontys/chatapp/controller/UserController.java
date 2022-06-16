@@ -7,7 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fontys.chatapp.model.Role;
 import edu.fontys.chatapp.model.User;
-import edu.fontys.chatapp.service.UserService;
+import edu.fontys.chatapp.services.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

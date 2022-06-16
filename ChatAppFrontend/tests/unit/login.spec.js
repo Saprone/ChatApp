@@ -10,7 +10,7 @@ describe('Login.vue', () => {
     expect(input_username.element.value).toBe('admin')
   })
 })
-describe('Login.vue', () => {
+describe('Login.vue, () => {
   it('test password input', () => {
     const wrapper = mount(Login)
     const input_password = wrapper.findComponent({ref: 'password'})

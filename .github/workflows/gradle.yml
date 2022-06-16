@@ -25,6 +25,10 @@ jobs:
       with:
         java-version: '16'
         distribution: 'temurin'
+        
+    - name: Run dependencies
+      working-directory: ./ChatAppFrontend
+      run: npm install     
       
     - name: Run frontend tests
       working-directory: ./ChatAppFrontend

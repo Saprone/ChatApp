@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from '../App.vue'
+import Main from '../main.js'
 /*import Dashboardchatroom from './views/DashboardChatroom.vue'
 import Dashboardusers from './views/DashboardUsers.vue'
 import Login from './views/Login.vue'

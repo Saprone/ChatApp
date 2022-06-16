@@ -1,4 +1,4 @@
-package edu.fontys.chatapp.filter;
+package edu.fontys.chatapp.filters;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

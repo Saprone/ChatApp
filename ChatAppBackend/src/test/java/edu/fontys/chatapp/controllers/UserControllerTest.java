@@ -1,8 +1,8 @@
-package edu.fontys.chatapp.controller;
+package edu.fontys.chatapp.controllers;
 
-import edu.fontys.chatapp.model.User;
-import edu.fontys.chatapp.repository.UserRepository;
-import edu.fontys.chatapp.service.UserService;
+import edu.fontys.chatapp.models.User;
+import edu.fontys.chatapp.repositorys.UserRepository;
+import edu.fontys.chatapp.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

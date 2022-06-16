@@ -1,7 +1,7 @@
-package edu.fontys.chatapp.security;
+package edu.fontys.chatapp.securitys;
 
-import edu.fontys.chatapp.filter.CustomAuthenticationFilter;
-import edu.fontys.chatapp.filter.CustomAuthorizationFilter;
+import edu.fontys.chatapp.filters.CustomAuthenticationFilter;
+import edu.fontys.chatapp.filters.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

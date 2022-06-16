@@ -25,10 +25,18 @@ jobs:
       with:
         java-version: '16'
         distribution: 'temurin'
-        
+     
+    - name: Run check updates globally
+      working-directory: ./ChatAppFrontend 
+      run: npm i -g npm-check-updates
+
+    - name: Run check updates locally
+      working-directory: ./ChatAppFrontend 
+      run: npm-check-updates -u
+     
     - name: Install dependencies
       working-directory: ./ChatAppFrontend
-      run: npm ci  
+      run: npm install
       
     - name: Run frontend build
       working-directory: ./ChatAppFrontend

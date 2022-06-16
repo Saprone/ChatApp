@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-/*import Chatroom from './views/Chatroom.vue'
-import Dashboardchatroom from './views/DashboardChatroom.vue'
+import Chatroom from '../views/Chatroom'
+/*import Dashboardchatroom from './views/DashboardChatroom.vue'
 import Dashboardusers from './views/DashboardUsers.vue'
 import Login from './views/Login.vue'
-import Register from './views/Register.vue'*/
-import Test from '@/services/UserService.js'
+import Register from './views/Register.vue'
 
 Vue.use(VueRouter)
 
-/*const routes = [
+const routes = [
   {
     path: '/',
     name: 'Login',

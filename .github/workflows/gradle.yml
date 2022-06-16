@@ -29,3 +29,7 @@ jobs:
     - name: Build with Gradle 
       working-directory: ./ChatAppBackend
       run: gradle wrapper --gradle-version 7.3.1
+      
+    - name: Run frontend tests
+      working-directory: ./ChatAppFrontend
+      run: npm run test:unit

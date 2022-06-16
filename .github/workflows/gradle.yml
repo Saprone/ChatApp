@@ -32,11 +32,11 @@ jobs:
       
     - name: Run frontend build
       working-directory: ./ChatAppFrontend
-      run: npm run test:unit
-  
+      run: npm run build --if-present
+      
     - name: Run frontend tests
       working-directory: ./ChatAppFrontend
-      run: npm run build --if-present
+      run: npm run test:unit
   
     - name: Build with Gradle 
       working-directory: ./ChatAppBackend

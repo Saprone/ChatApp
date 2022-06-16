@@ -5,7 +5,7 @@ import Dashboardchatroom from './views/DashboardChatroom.vue'
 import Dashboardusers from './views/DashboardUsers.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'*/
-import Test from '../services/UserService'
+import Test from '../services/UserService.js'
 
 Vue.use(VueRouter)
 

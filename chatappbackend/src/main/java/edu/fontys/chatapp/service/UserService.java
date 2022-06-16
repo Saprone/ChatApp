@@ -1,7 +1,7 @@
 package edu.fontys.chatapp.service;
 
-import edu.fontys.chatapp.model.Role;
-import edu.fontys.chatapp.model.User;
+import edu.fontys.chatapp.models.Role;
+import edu.fontys.chatapp.models.User;
 import java.util.List;
 
 public interface UserService {

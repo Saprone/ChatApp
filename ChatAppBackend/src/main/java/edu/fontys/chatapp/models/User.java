@@ -1,4 +1,4 @@
-package edu.fontys.chatapp.model;
+package edu.fontys.chatapp.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

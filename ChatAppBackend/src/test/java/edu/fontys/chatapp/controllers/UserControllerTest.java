@@ -1,4 +1,4 @@
-package edu.fontys.chatapp.controller;
+package edu.fontys.chatapp.controllers;
 
 import edu.fontys.chatapp.models.User;
 import edu.fontys.chatapp.repository.UserRepository;

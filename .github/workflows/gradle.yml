@@ -33,10 +33,6 @@ jobs:
     - name: Run check updates locally
       working-directory: ./ChatAppFrontend 
       run: npm-check-updates -u
-     
-    - name: Install dependencies
-      working-directory: ./ChatAppFrontend
-      run: npm ci
       
     - name: Run frontend build
       working-directory: ./ChatAppFrontend

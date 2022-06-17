@@ -25,4 +25,4 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 # 2. list docker networks:                  docker network ls
 
 #    % chatappbackend + mysql %
-# 1. run chatappbackend:                    docker run -p 9090:8080 --name mysql:latest --net spring-net -e MYSQL_HOST=mysqldb -e MYSQL_USER=root -e MYSQL_PASSWORD=123 -e MYSQL_PORT=3306 chatappbackend
+# 1. run chatappbackend:                    docker run -p 9090:8080 --name mysql --net spring-net -e MYSQL_HOST=mysqldb -e MYSQL_USER=root -e MYSQL_PASSWORD= -e MYSQL_PORT=3306 chatappbackend

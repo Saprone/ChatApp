@@ -4,6 +4,9 @@ EXPOSE 8082
 ADD build/libs/ChatApp-1.0-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 
+#    % ChatApp-1.0-SNAPSHOT.jar %
+# 1. build the application jar file:        gradle clean build jar
+
 #    % mysql docker image %
 # 1. mysql docker image:                    docker pull mysql
 
@@ -14,9 +17,12 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 # 4. specify login credentials: 	        mysql -u root -p123
 # 5. show databases mysql container:        show databases;
 
-# 1. pull mysql docker image:               docker pull mysql
-# 2. run msql docker container:             docker run -p 3306:3306 --name mysqldb -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=chatapp mysql
-# 3. build the application jar file:        gradle clean build jar
-# 4. create chatappbackend docker image:    docker build -t chatappbackend .
-# 5. create spring-net network:             docker network create spring-net
-# 6. run chatappbackend:                    docker run -p 9090:8080 --name chatappbackend --net spring-net -e MYSQL_HOST=mysqldb -e MYSQL_USER=root -e MYSQL_PASSWORD= -e MYSQL_PORT=3306 chatappbackend
+#    % chatappbackend docker image %
+# 1. create chatappbackend docker image:    docker build -t chatappbackend .
+
+#    % spring-net docker network %
+# 1. create spring-net network:             docker network create spring-net
+# 2. list docker networks:                  docker network ls
+
+#    % chatappbackend + mysql %
+# 1. run chatappbackend:                    docker run -p 9090:8080 --name mysql:latest --net spring-net -e MYSQL_HOST=mysqldb -e MYSQL_USER=root -e MYSQL_PASSWORD=123 -e MYSQL_PORT=3306 chatappbackend

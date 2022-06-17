@@ -11,7 +11,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 # 1. mysql docker image:                    docker pull mysql
 
 #    % mysql docker container %
-# 1. run mysql docker container:	        docker container run -d --name mysqldb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 mysql:latest
+# 1. run mysql docker container:	        docker run -d --name mysqldb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 mysql
 # 2. get mysql version container:           docker exec mysqldb mysql --version
 # 3. login mysql container:                 docker exec -it mysqldb bash
 # 4. specify login credentials: 	        mysql -u root -p123
@@ -25,4 +25,4 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 # 2. list docker networks:                  docker network ls
 
 #    % chatappbackend + mysql %
-# 1. run chatappbackend:                    docker run -p 9090:8080 --name mysql --net spring-net -e MYSQL_HOST=mysqldb -e MYSQL_USER=root -e MYSQL_PASSWORD= -e MYSQL_PORT=3306 chatappbackend
+# 1. run chatappbackend:                    docker run -p 9090:8080 --name mysql --net spring-net -e MYSQL_HOST=mysqldb -e MYSQL_USER=root -e MYSQL_PASSWORD=123 -e MYSQL_PORT=3306 chatappbackend

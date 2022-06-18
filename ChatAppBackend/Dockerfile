@@ -1,7 +1,7 @@
 FROM openjdk:12-jdk-alpine
 VOLUME /tmp
 EXPOSE 8082
-ADD build/libs/ChatApp-1.0-SNAPSHOT.jar app.jar
+COPY build/libs/ChatApp-1.0-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 #    % ChatApp-1.0-SNAPSHOT.jar %
